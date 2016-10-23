@@ -4,7 +4,7 @@
 set -x;
 set -o errexit
 
-GIT=https://github.com/CLD2Owners/cld2.git
+GIT=https://github.com/jmhodges/cld2.git
 DIR=cld2
 
 # Checkout a temporary copy of the repository
