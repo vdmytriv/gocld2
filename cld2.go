@@ -13,13 +13,26 @@ import "unsafe"
 
 // Detect returns the language code for detected language
 // in the given text.
-func Detect(text string) string {
+func Detect(text string) (result string) {
 	cs := C.CString(text)
+
+	result = ""
+
+	defer func() {
+		if r := recover(); r != nil {
+			log.Println("Recovered in downloadWithProxy ", r)
+			result = ""
+		}
+	} ()
+
 	res := C.DetectLang(cs, -1)
+
 	C.free(unsafe.Pointer(cs))
 	var lang string
 	if res != nil {
 		lang = C.GoString(res)
 	}
-	return lang
+	result := lang
+
+	return
 }
